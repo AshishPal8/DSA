@@ -63,6 +63,15 @@ void insertion_sort(int arr[], int n)
         }
     }
 }
+
+// divide & merge
+void merge_sort(int arr[], int n)
+{
+}
+
+//
+void quick_sort() {}
+
 int main()
 {
     int n;
@@ -71,7 +80,7 @@ int main()
 
     for (int i = 0; i < n; i++)
         cin >> arr[i];
-    insertion_sort(arr, n);
+    selection_sort(arr, n);
     for (int i = 0; i < n; i++)
     {
         cout << arr[i] << " ";
