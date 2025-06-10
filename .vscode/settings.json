@@ -62,6 +62,10 @@
     "map": "cpp",
     "sstream": "cpp",
     "unordered_map": "cpp",
-    "algorithm": "cpp"
+    "algorithm": "cpp",
+    "deque": "cpp",
+    "list": "cpp",
+    "queue": "cpp",
+    "stack": "cpp"
   }
 }

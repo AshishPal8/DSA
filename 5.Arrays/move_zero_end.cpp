@@ -3,36 +3,58 @@
 
 using namespace std;
 
+//brute force approach
+// vector<int> moveZeros(int n, vector<int> a)
+// {
+//     // temp array
+//     vector<int> temp;
+
+//     // copy non zero elements
+//     // from original -> temp
+//     for (int i = 0; i < n; i++)
+//     {
+//         if (a[i] != 0)
+//         {
+//             temp.push_back(a[i]);
+//         }
+//     }
+
+//     // size of non-zero element
+//     int nz = temp.size();
+
+//     // copy from temp to original
+//     for (int i = 0; i < nz; i++)
+//     {
+//         a[i] = temp[i];
+//     }
+
+//     // fill remaining with zero
+//     for (int i = nz; i < n; i++)
+//     {
+//         a[i] = 0;
+//     }
+
+//     return a;
+// }
+
 vector<int> moveZeros(int n, vector<int> a)
 {
-    // temp array
-    vector<int> temp;
-
-    // copy non zero elements
-    // from original -> temp
-    for (int i = 0; i < n; i++)
-    {
-        if (a[i] != 0)
-        {
-            temp.push_back(a[i]);
+    int j = -1;
+    for(int i = 0; i < n; i++){
+        if(a[i] == 0) {
+            j = i;
+            break;
         }
     }
 
-    // size of non-zero element
-    int nz = temp.size();
+    if(j == -1) return a;
 
-    // copy from temp to original
-    for (int i = 0; i < nz; i++)
-    {
-        a[i] = temp[i];
+    for(int i = j+1; i < n; i++){
+        if(a[i] != 0){
+            swap(a[i], a[j]);
+            j++;
+        }
     }
-
-    // fill remaining with zero
-    for (int i = nz; i < n; i++)
-    {
-        a[i] = 0;
-    }
-
     return a;
 }
 
