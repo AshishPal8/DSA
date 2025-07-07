@@ -1,1 +1,2 @@
-Count is: 3
+Your name length is 6
+Reverse is hsihsa
