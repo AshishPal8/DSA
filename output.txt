@@ -1,2 +1,1 @@
-Your name length is 6
-Reverse is hsihsa
+Result is: 1
