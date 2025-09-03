@@ -19,6 +19,7 @@ bool checkIsPangram(string s){
     return 1;
 }
 
+
 int main()
 {
     string s = "thequickbrownfoxjumpsoverthelazydog";

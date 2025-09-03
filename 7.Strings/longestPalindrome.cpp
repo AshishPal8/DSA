@@ -44,11 +44,70 @@ int longestPalindrome(string s)
     return count + odd;
 }
 
+bool isValid(char ch)
+{
+    if ((ch >= 'a' && ch <= 'z') || (ch >= 'A' && ch <= 'Z') || (ch >= '0' && ch <= '9'))
+    {
+        return 1;
+    }
+    else
+    {
+        return 0;
+    }
+}
+
+char toLowercase(char ch)
+{
+    if ((ch >= 'a' && ch <= 'z') || (ch >= '0' && ch <= '9'))
+    {
+        return ch;
+    }
+    else
+    {
+        char temp = ch - 'A' + 'a';
+        return temp;
+    }
+}
+
+bool checkPalindrome(string s)
+{
+    int start = 0;
+    int end = s.length() - 1;
+
+    while (start < end)
+    {
+        if (s[start] != s[end])
+        {
+            return false;
+        }
+        else
+        {
+            start++;
+            end--;
+        }
+    }
+    return 1;
+}
+
 int main()
 {
-    string s = "abccccdd";
+    string s = "namam";
+    string temp = "";
 
-    int result = longestPalindrome(s);
+    for (int i = 0; i < s.length(); i++)
+    {
+        if (isValid(s[i]))
+        {
+            temp.push_back(s[i]);
+        }
+    }
 
-    cout << "Longest palindrome is: " << result << endl;
+    for (int i = 0; i < s.length(); i++)
+    {
+        temp[i] = toLowercase(s[i]);
+    }
+
+    bool result = checkPalindrome(s);
+
+    cout << result << endl;
 }
