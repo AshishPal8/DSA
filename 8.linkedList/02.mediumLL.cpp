@@ -161,9 +161,87 @@ Node *evenOddLLBrute(Node *head)
     return head;
 }
 
+Node* SegregatetoOddEVen(Node* head){
+    Node* oddHead = new Node(-1);
+    Node* oddTail = oddHead;
+    Node* evenHead = new Node(-1);
+    Node* evenTail = evenHead;
+
+    Node* curr = head;
+    Node* temp;
+
+    while(curr){
+        temp = curr;
+        curr = curr->next;
+        temp->next = NULL;
+
+        if(temp->data & 1){
+            oddTail->next = temp;
+            oddTail = temp;
+        } else {
+            evenTail->next = temp;
+            evenTail = temp;
+        }
+    }
+    evenTail->next = oddHead->next;
+
+    return evenHead->next;
+
+}
+
+Node* removeNthNode(Node* head, int key){
+    int cnt = 0;
+    Node* temp = head;
+
+    while(temp != NULL){
+        cnt++;
+        temp = temp->next;
+    }
+    if(cnt == key){
+        Node* newHead = head->next;
+        free(head);
+        return newHead;
+    }
+    int res = cnt - key;
+    temp = head;
+
+    while(temp != NULL){
+        res--;
+        if(res ==0 ){
+            break;
+            temp = temp->next;
+        }
+    }
+    Node* delNode = temp->next;
+    temp->next = temp->next->next;
+    free(delNode);
+
+    return head;
+}
+
+Node* removeNthNodeOptimal(Node* head, int key){
+    Node* fast = head;
+    Node* slow = head;
+
+    for(int i = 0; i < key; i++){
+        fast = fast->next;
+    }
+    if(fast == NULL) {
+        return head->next;
+    }
+    while(fast->next != NULL){
+        fast = fast->next;
+        slow = slow->next;
+    }
+    Node* delNode = slow->next;
+    slow->next = slow->next->next;
+    free(delNode);
+    return head;
+}
+
 int main()
 {
-    vector<int> arr = {1, 4, 2, 5, 3};
+    vector<int> arr = {1,2,3,4};
     Node *head = convertArr2LL(arr);
 
     PrintList(head);
@@ -171,6 +249,9 @@ int main()
     // bool result = palindromeLLOptimal(head);
     // cout << (result ? "True" : "False") << endl;
 
-    Node *result = evenOddLLBrute(head);
+    // Node *result = SegregatetoOddEVen(head);
+    // PrintList(result);
+
+    Node* result = removeNthNodeOptimal(head, 1);
     PrintList(result);
 }
