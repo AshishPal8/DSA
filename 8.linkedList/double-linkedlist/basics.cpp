@@ -47,7 +47,7 @@ void PrintNode(Node *head)
         head = head->next;
 
     }
-    cout << endl;
+    cout << "NULL" << endl;
 }
 
 Node* insertAtTail(Node* head, int k){
@@ -128,9 +128,64 @@ Node* reverseDDLOptimal(Node* head){
     return prev->back;
 }
 
+Node*  deleteAllOccurance(Node* head, int key){
+    Node* temp = head;
+    while(temp != NULL){
+        if(temp->data == key){
+            if(temp == head) {
+                head = temp->next;
+            }
+
+            Node* nextNode = temp->next;
+            Node* prevNode = temp->back;
+            if(nextNode != NULL) nextNode->back = prevNode;
+            if(prevNode != NULL) prevNode->next = nextNode;
+
+            free(temp);
+            temp = nextNode;
+        } else {
+            temp = temp->next;
+        }
+    }
+    return head;
+}
+
+Node* findTail(Node* head){
+    Node* tail = head;
+    while(tail->next != NULL) tail = tail->next;
+
+    return tail;
+}
+
+vector<pair<int, int>> findAllPairs(Node* head, int key){
+    vector<pair<int, int>>ans;
+    Node* left = head;
+    Node* right = findTail(head);
+
+    cout << "Right: " << right->data << endl;
+
+    while(left->data < right->data){
+        if(left->data + right->data == key){
+            ans.push_back({left->data, right->data});
+            left = left->next;
+            right = right->back;
+        } else if(left->data + right->data < key){
+            left = left->next;
+        } else {
+            right = right->back;
+        }
+    }
+
+    return ans;
+}
+
+Node* removeDuplicates(Node* head){
+    Node* temp = head;
+}
+
 int main()
 {
-    vector<int> arr = {22, 43, 43, 2, 6, 7};
+    vector<int> arr = {1, 2, 3, 4, 9};
 
     Node* head = convertArr2DLL(arr);
 
@@ -138,23 +193,34 @@ int main()
 
     PrintNode(head);
 
-    cout << "After insert" << endl;
+    // cout << "After insert" << endl;
 
-    head = insertAtTail(head, 10);
-    head = insertAtTail(head, 11);
+    // head = insertAtTail(head, 10);
+    // head = insertAtTail(head, 11);
 
-    PrintNode(head);
+    // PrintNode(head);
 
-    cout << "After insert" << endl;
+    // cout << "After insert" << endl;
 
-    head = deleteFromTail(head);
-    PrintNode(head);
+    // head = deleteFromTail(head);
+    // PrintNode(head);
 
-    cout << "Reverse DDL Brute" << endl;
-    head = reverseDDLBrute(head);
-    PrintNode(head);
+    // cout << "Reverse DDL Brute" << endl;
+    // head = reverseDDLBrute(head);
+    // PrintNode(head);
 
-    cout << "Reverse DDL Optimal: " << endl;
-    head = reverseDDLOptimal(head);
-    PrintNode(head);
+    // cout << "Reverse DDL Optimal: " << endl;
+    // head = reverseDDLOptimal(head);
+    // PrintNode(head);
+
+    // cout << "Remove all occurance: " << endl;
+    // head = deleteAllOccurance(head, 6);
+    // PrintNode(head);
+
+    cout << "Find all pairs: " << endl;
+    vector<pair<int, int>>ans = findAllPairs(head, 5);
+    for(auto &p : ans ){
+        cout << p.first << ", " << p.second << endl;
+    }
+    
 }
