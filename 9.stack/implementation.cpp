@@ -3,87 +3,92 @@
 
 using namespace std;
 
-struct Node {
+struct stackNode {
     int val;
-    Node* next;
-}
-
-class Stack {
+    stackNode* next;
     int size;
-    int *arr;
-    int top;
-    
-    public : 
-        Stack(){
-            top: -1;
-            size: 1000;
-            arr = new int[size];
-        }
-        void push(int x){
-            top++;
-            arr[top] = x;
-        }
-        int pop(){
-            int x = arr[top];
-            top--;
-            return x;
-        }
-        int Top(){
-            return arr[top];
-        }
-        int Size(){
-              return top + 1;
-        }
+    stackNode(int d){
+        val = d;
+        next = NULL;
+    }
+
 };
 
+// class Stack {
+//     int size;
+//     int *arr;
+//     int top;
+    
+//     public : 
+//         Stack(){
+//             top: -1;
+//             size: 1000;
+//             arr = new int[size];
+//         }
+//         void push(int x){
+//             top++;
+//             arr[top] = x;
+//         }
+//         int pop(){
+//             int x = arr[top];
+//             top--;
+//             return x;
+//         }
+//         int Top(){
+//             return arr[top];
+//         }
+//         int Size(){
+//               return top + 1;
+//         }
+// };
+
 class StackLinkedlist {
-    Node* top = NULL;
+    stackNode* top = NULL;
     int size = 0;
 
     public: 
-       void push(int x){
-            newNode = new Node(x);
+       void stackPush(int x){
+            stackNode * newNode = new stackNode(x);
             newNode->next = top;
             top = newNode;
             size++;
         }
 
-        int pop(){
-            if(!top) return NULL;
+        int stackPop(){
+            if(top == NULL) return -1;
             int val = top->val;
-            temp = top;
+            stackNode* temp = top;
             top = top->next;
-            free(temp);
+            delete temp;
             size--;
             return val;
         }
 
-        int top(){
-            if(!top) return NULL;
+        int getTop(){
+            if(top == NULL) return -1;
 
             return top->val;
         }
 
-        int size(){
+        int stackSize(){
             return size;
         }
-}
-
+};
 
 
 int main(){
     StackLinkedlist s;
 
-    s.push(6);
-    s.push(3);
-    s.push(7);
-    s.push(71);
-    s.push(6);
+    s.stackPush(6);
+    s.stackPush(3);
+    s.stackPush(7);
+    s.stackPush(71);
+    s.stackPush(6);
 
-    cout << "Top of stack is before deleting any element " << s.top() << endl;
-    cout << "Size of stack is before deleting any element " << s.size() << endl;
-    cout << "Element deleted: " << s.pop() << endl;
-     cout << "Size of stack after deleting an element " << s.size() << endl;
+    cout << "Top of stack is before deleting any element " << s.getTop() << endl;
+    cout << "Size of stack is before deleting any element " << s.stackSize() << endl;
+    cout << "Element deleted: " << s.stackPop() << endl;
+     cout << "Size of stack after deleting an element " << s.stackSize() << endl;
 //   cout << "Top of stack after deleting an element " << s.Top() << endl;
-//   return 0;
+  return 0;
 }
