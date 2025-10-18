@@ -12,7 +12,7 @@ struct stackNode {
         next = NULL;
     }
 
-};
+}; 
 
 // class Stack {
 //     int size;
