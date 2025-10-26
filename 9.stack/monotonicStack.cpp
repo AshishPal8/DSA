@@ -50,10 +50,34 @@ vector<int> findNextGreater2(vector<int> &nums)
     return res;
 }
 
+vector<int> findNextSmall(vector<int> &nums)
+{
+    stack<int> st;
+    int n = nums.size();
+    vector<int>
+        res(n);
+
+    for (int i = n - 1; i >= 0; i--)
+    {
+        while (!st.empty() && st.top() >= nums[i])
+            st.pop();
+
+        if (st.empty())
+            res[i] = -1;
+
+        else
+            res[i] = st.top();
+        st.push(nums[i]);
+    }
+
+    return res;
+}
+
+
 int main()
 {
-    vector<int> arr = {5, 7, 1, 7, 6, 0};
-    vector<int> result = findNextGreater2(arr);
+    vector<int> arr = {4, 8, 5, 2, 25};
+    vector<int> result = findNextSmall(arr);
     for (int x : result)
     {
         cout << x << " ";
